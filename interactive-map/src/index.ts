@@ -24,7 +24,7 @@ const lng = -123.12196;
 function initMap(): void {
   map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
     center: { lat: lat, lng: lng },
-    zoom: 16,
+    zoom: 15,
   });
 }
 export { initMap };
