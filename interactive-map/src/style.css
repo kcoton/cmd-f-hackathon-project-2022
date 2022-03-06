@@ -28,13 +28,13 @@
 
 .filter_frame {
   width:90%;
-  height:12%;
+  height:auto;
   background-color:#E5E5E5;
   float:left;
   align-self: center;
   position:relative;
   overflow-x:hidden;
-  padding-top:5%;
+  overflow-y:hidden;
   padding-bottom:5%;
   padding-left:5%;
   text-align:center;
@@ -44,7 +44,7 @@
 
 .scroll_frame {
   width:92%;
-  height:88%;
+  height:75%;
   background-color: #E5E5E5;
   float:left;
   align-self: center;
@@ -85,20 +85,23 @@ body {
 
 #description {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 15px;
+  font-size: 45px;
   font-weight: 300;
 }
 
 #infowindow-content .title {
   font-weight: bold;
+  font-size: larger;
 }
 
 #infowindow-content {
   display: none;
+  font-size: larger;
 }
 
 #map #infowindow-content {
   display: inline;
+  font-size: larger;
 }
 
 .pac-card {
@@ -171,7 +174,7 @@ body {
   display: table-row;
   position: relative;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   background-color: #9EC242;
   color: #fff;
 }

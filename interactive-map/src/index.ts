@@ -84,7 +84,8 @@ function initMap(): void {
          console.log("Returned place contains no geometry");
          return;
        }
- 
+        
+       addPlaces(places,map);
        const icon = {
          url: place.icon as string,
          size: new google.maps.Size(71, 71),
@@ -116,7 +117,6 @@ function initMap(): void {
   let service = new google.maps.places.PlacesService(map);
   let getNextPage: () => void | false;
   const moreButton = document.getElementById("more") as HTMLButtonElement;
-
   moreButton.onclick = function () {
     moreButton.disabled = true;
 
@@ -126,6 +126,7 @@ function initMap(): void {
   };
 
   // Perform a nearby search. 
+
   const places = searchBox.getPlaces;
   if (places == undefined || places.length == 0) {
     service.nearbySearch(
@@ -154,10 +155,12 @@ function initMap(): void {
     places: google.maps.places.PlaceResult[],
     map: google.maps.Map
   ) {
+
     const placesList = document.getElementById("places") as HTMLElement;
   
     for (const place of places) {
-      if (place.geometry && place.geometry.location && place.types?.at(0) == "restaurant") {
+      if (place.geometry && place.geometry.location 
+        && place.types?.at(0) == "restaurant") {
         const image = {
           url: place.icon!,
           size: new google.maps.Size(71, 71),
@@ -165,6 +168,7 @@ function initMap(): void {
           anchor: new google.maps.Point(17, 34),
           scaledSize: new google.maps.Size(25, 25),
         };
+        
   
         new google.maps.Marker({
           map,
@@ -173,9 +177,11 @@ function initMap(): void {
           position: place.geometry.location,
         });
   
-        const li = document.createElement("li");
+        let li: HTMLElement;
+          li = document.createElement("li");
           li.textContent = place.name!;
           li.textContent += " -- Rating: " + place.rating;
+        
           placesList.appendChild(li);
     
           li.addEventListener("click", () => {
