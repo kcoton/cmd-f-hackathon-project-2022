@@ -1,64 +1,69 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>cmd-f-hackathon-project-2022</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <link rel="stylesheet" type="text/css" href="./style.css" />
-    <script src="./index.js"></script>
-  </head>
-  <body>
-    <div class="wrapper">
-      <div id="map"></div>
-        <!-- Search box for the map -->
-        <div class="sidebar">
-            <input
-              id="pac-input"
-              class="controls"
-              type="text"
-              placeholder="Breka Downtown Vancouver"
-            />
-          <div class="filter_frame">Filters
-            <br/> 
-            <div class="checkbox_frame">
-              <div class="control-group">
-              <label class="control control-checkbox">
-                  Mandarin
-                      <input type="checkbox" checked="checked" />
-              </label>
-              <label class="control control-checkbox">
-                  Korean
-                      <input type="checkbox" />
-              </label>
-              <label class="control control-checkbox">
-                  Japanese
-                      <input type="checkbox" />
-              </label></div>
-            </div>
-            <div class="checkbox_frame">
-              <div class="control-group">
-                <label class="control control-checkbox">
-                    Gluten-Free
-                        <input type="checkbox" checked="checked" />
-                </label>
-                <label class="control control-checkbox">
-                    Vegan
-                        <input type="checkbox" />
-                </label>
-                <label class="control control-checkbox">
-                    Halal
-                        <input type="checkbox" />
-                </label></div>
+
+<head>
+  <title>cmd-f-hackathon-project-2022</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <script src="./index.js"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div id="map"></div>
+    <!-- Search box for the map -->
+    <div class="sidebar">
+      <input id="pac-input" class="controls" type="text" placeholder="Breka Downtown Vancouver" />
+      <div class="filter_frame">Filters
+        <br />
+        <div class="checkbox_frame">
+          <div class="control-group">
+            <label class="control control-checkbox">
+              Mandarin
+              <input type="checkbox" checked="checked" />
+            </label>
+            <label class="control control-checkbox">
+              Korean
+              <input type="checkbox" />
+            </label>
+            <label class="control control-checkbox">
+              Japanese
+              <input type="checkbox" />
+            </label>
           </div>
-          </div>
-          </div>
-          <div class="scroll_frame">h</div>
         </div>
+        <div class="checkbox_frame"></div>
+        <div class="checkbox_frame">
+          <div class="control-group">
+            <label class="control control-checkbox">
+              Gluten-Free
+              <input type="checkbox" checked="checked" />
+            </label>
+            <label class="control control-checkbox">
+              Vegan
+              <input type="checkbox" id="vegan"/>
+            </label>
+            <label class="control control-checkbox">
+              Halal
+              <input type="checkbox" />
+            </label>
+          </div>
+        </div>
+
+      </div>
+      <div class="scroll_frame">
+        <ul id="places"></ul>
+        <button id="more">Load more results</button>
       </div>
     </div>
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDJwT-0nxO5y-wUdvBbqN5JC27n4HTBrwo&callback=initAutocomplete&callback=initMap&v=weekly"
-      async
-    ></script>
-  </body>
+  </div>
+  </div>
+  </div>
+  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDJwT-0nxO5y-wUdvBbqN5JC27n4HTBrwo&callback=initAutocomplete&callback=initMap&v=weekly"
+    async></script>
+
+</body>
+
 </html>

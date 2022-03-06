@@ -53,7 +53,6 @@ function initMap(): void {
    // Create the search box and link it to the UI element.
    const input = document.getElementById("pac-input") as HTMLInputElement;
    const searchBox = new google.maps.places.SearchBox(input);
-   //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
  
    // Bias the SearchBox results towards current map's viewport.
    map.addListener("bounds_changed", () => {
@@ -113,6 +112,79 @@ function initMap(): void {
      });
      map.fitBounds(bounds);
    });
+   
+  let service = new google.maps.places.PlacesService(map);
+  let getNextPage: () => void | false;
+  const moreButton = document.getElementById("more") as HTMLButtonElement;
+
+  moreButton.onclick = function () {
+    moreButton.disabled = true;
+
+    if (getNextPage) {
+      getNextPage();
+    }
+  };
+
+  // Perform a nearby search. 
+  const places = searchBox.getPlaces;
+  if (places == undefined || places.length == 0) {
+    service.nearbySearch(
+      { location: ROBSON_SQUARE, radius: 700, type: "restaurant" },
+      (
+        results: google.maps.places.PlaceResult[] | null,
+        status: google.maps.places.PlacesServiceStatus,
+        pagination: google.maps.places.PlaceSearchPagination | null
+      ) => {
+        if (status !== "OK" || !results) return;
+
+        addPlaces(results, map);
+        moreButton.disabled = !pagination || !pagination.hasNextPage;
+
+        if (pagination && pagination.hasNextPage) {
+          getNextPage = () => {
+            // Note: nextPage will call the same handler function as the initial call
+            pagination.nextPage();
+          };
+        }
+      }
+    );
+  }
+
+  function addPlaces(
+    places: google.maps.places.PlaceResult[],
+    map: google.maps.Map
+  ) {
+    const placesList = document.getElementById("places") as HTMLElement;
+  
+    for (const place of places) {
+      if (place.geometry && place.geometry.location && place.types?.at(0) == "restaurant") {
+        const image = {
+          url: place.icon!,
+          size: new google.maps.Size(71, 71),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25),
+        };
+  
+        new google.maps.Marker({
+          map,
+          icon: image,
+          title: place.name!,
+          position: place.geometry.location,
+        });
+  
+        const li = document.createElement("li");
+          li.textContent = place.name!;
+          li.textContent += " -- Rating: " + place.rating;
+          placesList.appendChild(li);
+    
+          li.addEventListener("click", () => {
+            map.setCenter(place.geometry!.location!);
+          });
+        
+      }
+    }
+  }
 }
 
   export { initMap };
