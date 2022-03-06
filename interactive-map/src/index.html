@@ -7,17 +7,22 @@
     <script src="./index.js"></script>
   </head>
   <body>
-    <!-- Search box for the map -->
-    <input
-      id="pac-input"
-      class="controls"
-      type="text"
-      placeholder="Breka Downtown Vancouver"
-    />
-    
-    <!-- Interactive map display -->
-    <div id="map"></div>
-
+    <div class="wrapper">
+      <div id="map"></div>
+        <!-- Search box for the map -->
+        <div class="sidebar">
+          <div class="search_frame">
+            <input
+              id="pac-input"
+              class="controls"
+              type="text"
+              placeholder="Breka Downtown Vancouver"
+            />
+          </div>
+          <div class="filter_frame">h</div>
+        </div>
+      </div>
+    </div>
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script
       src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDJwT-0nxO5y-wUdvBbqN5JC27n4HTBrwo&callback=initAutocomplete&callback=initMap&v=weekly"
