@@ -22,14 +22,32 @@ let service: google.maps.places.PlacesService;
 let infowindow: google.maps.InfoWindow;
 
 // coordinates for robson square
-const lat = 49.282045;
-const lng = -123.12196;
+const ROBSON_SQUARE = {
+  lat: 49.282045,
+  lng: -123.12196
+}
+
+const DOWNTOWN_VANCOUVER_BOUNDS = {
+  north: 49.296392,
+  south: 49.269941,
+  west: -123.151600,
+  east: -123.101361,
+}
 
 // initializes interactive map
 function initMap(): void {
   var map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
-    center: { lat: lat, lng: lng },
+    center: ROBSON_SQUARE,
+    restriction: {
+      latLngBounds: DOWNTOWN_VANCOUVER_BOUNDS,
+      strictBounds: false,
+    },
     zoom: 15,
+    mapTypeControl: true, 
+    mapTypeControlOptions: {
+      style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+      position: google.maps.ControlPosition.TOP_RIGHT,
+    },
   });
 
    // Create the search box and link it to the UI element.
